@@ -1,1 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus AI</title>
 
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/6b0b63b7f0.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-circle">
+                N
+            </div>
+
+            <div class="logo-text">
+                <h2>Nexus AI</h2>
+                <p>Version 3.0</p>
+            </div>
+
+        </div>
+
+        <button class="new-chat">
+            <i class="fa-solid fa-plus"></i>
+            New Chat
+        </button>
+
+        <div class="history">
+
+            <h3>Recent Chats</h3>
+
+            <div class="chat-item active">
+                <i class="fa-regular fa-message"></i>
+                Welcome
+            </div>
+
+            <div class="chat-item">
+                <i class="fa-regular fa-message"></i>
+                Portfolio Website
+            </div>
+
+            <div class="chat-item">
+                <i class="fa-regular fa-message"></i>
+                Python Help
+            </div>
+
+        </div>
+
+        <div class="sidebar-bottom">
+
+            <button class="sidebar-btn">
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </button>
+
+            <button class="sidebar-btn">
+                <i class="fa-solid fa-user"></i>
+                Profile
+            </button>
+
+        </div>
+
+    </aside>
+
+    <!-- Main -->
+
+    <main class="main">
+
+        <header class="top-bar">
+
+            <h1>Nexus AI</h1>
+
+            <div class="top-buttons">
+
+                <button>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+
+                <button>
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+            </div>
+
+        </header>
+
+        <section class="chat-area" id="chatArea">
+
+            <div class="message ai">
+
+                <div class="avatar">
+                    N
+                </div>
+
+                <div class="bubble">
+
+                    <h4>Nexus</h4>
+
+                    <p>
+                        Hello David 👋
+                    </p>
+
+                    <p>
+                        I'm Nexus AI.
+                    </p>
+
+                    <p>
+                        What are we building today?
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <div class="typing" id="typing">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+        <footer class="input-area">
+
+            <button id="attachButton">
+                <i class="fa-solid fa-paperclip"></i>
+            </button>
+
+            <input
+                    id="messageInput"
+                    type="text"
+                    placeholder="Message Nexus..."
+                    autocomplete="off"
+            >
+
+            <button id="sendButton">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+
+        </footer>
+
+    </main>
+
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
