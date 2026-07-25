@@ -1,16 +1,7 @@
-// ==========================
-// Nexus AI
-// script.js
-// ==========================
-
 const input = document.getElementById("messageInput");
 const sendButton = document.getElementById("sendButton");
 const chatArea = document.getElementById("chatArea");
 const typing = document.getElementById("typing");
-
-// --------------------------
-// Add Message
-// --------------------------
 
 function addMessage(sender, text) {
 
@@ -42,58 +33,14 @@ function addMessage(sender, text) {
     }
 
     chatArea.appendChild(message);
-
     chatArea.scrollTop = chatArea.scrollHeight;
 }
 
-// --------------------------
-// Fake AI Response
-// --------------------------
-
-function generateResponse(message) {
-
-    const msg = message.toLowerCase();
-
-    if (msg.includes("hello") || msg.includes("hi")) {
-        return "Hello! 👋 I'm Nexus AI. What can I help you build today?";
-    }
-
-    if (msg.includes("how are you")) {
-        return "Running perfectly. Thanks for asking!";
-    }
-
-    if (msg.includes("website")) {
-        return "I'd love to help you build a website. We'll make it modern and responsive.";
-    }
-
-    if (msg.includes("python")) {
-        return "Python is one of my favorite languages. Let's write some code!";
-    }
-
-    if (msg.includes("html")) {
-        return "HTML gives your webpage its structure. Ready to build something awesome?";
-    }
-
-    if (msg.includes("css")) {
-        return "CSS is what makes everything look beautiful.";
-    }
-
-    if (msg.includes("javascript")) {
-        return "JavaScript brings websites to life with interactivity.";
-    }
-
-    return "Interesting! Once my AI backend is connected, I'll be able to answer much more intelligently.";
-}
-
-// --------------------------
-// Send Message
-// --------------------------
-
-function sendMessage() {
+async function sendMessage() {
 
     const text = input.value.trim();
 
-    if (text === "") return;
+    if (!text) return;
 
     addMessage("user", text);
 
@@ -101,27 +48,48 @@ function sendMessage() {
 
     typing.style.display = "block";
 
-    setTimeout(() => {
+    try {
+
+        const response = await fetch("http://127.0.0.1:8000/chat", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                message: text
+            })
+
+        });
+
+        const data = await response.json();
 
         typing.style.display = "none";
 
-        const response = generateResponse(text);
+        addMessage("ai", data.response);
 
-        addMessage("ai", response);
+    } catch (error) {
 
-    }, 1200);
+        typing.style.display = "none";
+
+        addMessage(
+            "ai",
+            "⚠️ I couldn't connect to the Nexus backend. Make sure FastAPI is running."
+        );
+
+        console.error(error);
+
+    }
 
 }
 
-// --------------------------
-// Events
-// --------------------------
-
 sendButton.addEventListener("click", sendMessage);
 
-input.addEventListener("keydown", (event) => {
+input.addEventListener("keydown", function(event){
 
-    if (event.key === "Enter") {
+    if(event.key === "Enter"){
 
         sendMessage();
 
