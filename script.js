@@ -1,9 +1,21 @@
+// ===============================
+// Nexus AI
+// Version 4
+// ===============================
+
 const input = document.getElementById("messageInput");
 const sendButton = document.getElementById("sendButton");
 const chatArea = document.getElementById("chatArea");
 const typing = document.getElementById("typing");
 
-function addMessage(sender, text) {
+const clearButton = document.getElementById("clearChat");
+const newChatButton = document.getElementById("newChat");
+
+// ----------------------------
+// Add Message
+// ----------------------------
+
+function addMessage(sender, text){
 
     const message = document.createElement("div");
     message.className = `message ${sender}`;
@@ -18,61 +30,73 @@ function addMessage(sender, text) {
     const title = document.createElement("h4");
     title.innerText = sender === "ai" ? "Nexus" : "You";
 
-    const paragraph = document.createElement("p");
-    paragraph.innerText = text;
+    const body = document.createElement("p");
+    body.innerText = text;
 
     bubble.appendChild(title);
-    bubble.appendChild(paragraph);
+    bubble.appendChild(body);
 
-    if (sender === "user") {
+    if(sender === "user"){
+
         message.appendChild(bubble);
         message.appendChild(avatar);
-    } else {
+
+    }else{
+
         message.appendChild(avatar);
         message.appendChild(bubble);
+
     }
 
     chatArea.appendChild(message);
+
     chatArea.scrollTop = chatArea.scrollHeight;
+
 }
 
-async function sendMessage() {
+// ----------------------------
+// AI Request
+// ----------------------------
 
-    const text = input.value.trim();
+async function askNexus(message){
 
-    if (!text) return;
+    typing.style.display = "flex";
 
-    addMessage("user", text);
+    try{
 
-    input.value = "";
+        const response = await fetch("http://127.0.0.1:8000/chat",{
 
-    typing.style.display = "block";
+            method:"POST",
 
-    try {
-
-        const response = await fetch("http://127.0.0.1:8000/chat", {
-
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
+            headers:{
+                "Content-Type":"application/json"
             },
 
-            body: JSON.stringify({
-                message: text
+            body:JSON.stringify({
+
+                message:message
+
             })
 
         });
 
+        if(!response.ok){
+
+            throw new Error("Server Error");
+
+        }
+
         const data = await response.json();
 
-        typing.style.display = "none";
+        typing.style.display="none";
 
-        addMessage("ai", data.response);
+        addMessage("ai",data.response);
 
-    } catch (error) {
+    }
 
-        typing.style.display = "none";
+    catch(error){
+
+        typing.style.display="none";
 
         addMessage(
             "ai",
@@ -85,11 +109,73 @@ async function sendMessage() {
 
 }
 
-sendButton.addEventListener("click", sendMessage);
+// ----------------------------
+// Send Message
+// ----------------------------
 
-input.addEventListener("keydown", function(event){
+function sendMessage(){
 
-    if(event.key === "Enter"){
+    const text = input.value.trim();
+
+    if(text === "") return;
+
+    addMessage("user",text);
+
+    input.value="";
+
+    askNexus(text);
+
+}
+
+// ----------------------------
+// New Chat
+// ----------------------------
+
+newChatButton.addEventListener("click",()=>{
+
+    chatArea.innerHTML=`
+
+        <div class="message ai">
+
+            <div class="avatar">N</div>
+
+            <div class="bubble">
+
+                <h4>Nexus</h4>
+
+                <p>Hello! 👋</p>
+
+                <p>New conversation started.</p>
+
+                <p>What would you like to build today?</p>
+
+            </div>
+
+        </div>
+
+    `;
+
+});
+
+// ----------------------------
+// Clear Chat
+// ----------------------------
+
+clearButton.addEventListener("click",()=>{
+
+    chatArea.innerHTML="";
+
+});
+
+// ----------------------------
+// Events
+// ----------------------------
+
+sendButton.addEventListener("click",sendMessage);
+
+input.addEventListener("keydown",(event)=>{
+
+    if(event.key==="Enter"){
 
         sendMessage();
 
