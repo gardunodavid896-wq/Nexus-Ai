@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Nexus AI</title>
 
     <link rel="stylesheet" href="style.css">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -18,45 +21,58 @@
 
 <div class="app">
 
+    <!-- ========================= -->
     <!-- Sidebar -->
+    <!-- ========================= -->
 
     <aside class="sidebar">
 
-        <div class="logo">
+        <div>
 
-            <div class="logo-circle">
-                N
+            <div class="logo">
+
+                <div class="logo-circle">
+                    N
+                </div>
+
+                <div class="logo-text">
+
+                    <h2>Nexus AI</h2>
+
+                    <p>Version 4.0</p>
+
+                </div>
+
             </div>
 
-            <div class="logo-text">
-                <h2>Nexus AI</h2>
-                <p>Version 3.0</p>
-            </div>
+            <button class="new-chat" id="newChat">
 
-        </div>
+                ＋ New Chat
 
-        <button class="new-chat">
-            <i class="fa-solid fa-plus"></i>
-            New Chat
-        </button>
+            </button>
 
-        <div class="history">
+            <div class="history">
 
-            <h3>Recent Chats</h3>
+                <h3>Recent Chats</h3>
 
-            <div class="chat-item active">
-                <i class="fa-regular fa-message"></i>
-                Welcome
-            </div>
+                <div class="chat-item active">
 
-            <div class="chat-item">
-                <i class="fa-regular fa-message"></i>
-                Portfolio Website
-            </div>
+                    Welcome
 
-            <div class="chat-item">
-                <i class="fa-regular fa-message"></i>
-                Python Help
+                </div>
+
+                <div class="chat-item">
+
+                    Portfolio Website
+
+                </div>
+
+                <div class="chat-item">
+
+                    Python Help
+
+                </div>
+
             </div>
 
         </div>
@@ -64,47 +80,59 @@
         <div class="sidebar-bottom">
 
             <button class="sidebar-btn">
-                <i class="fa-solid fa-gear"></i>
-                Settings
+
+                ⚙ Settings
+
             </button>
 
             <button class="sidebar-btn">
-                <i class="fa-solid fa-user"></i>
-                Profile
+
+                👤 Profile
+
             </button>
 
         </div>
 
     </aside>
 
+    <!-- ========================= -->
     <!-- Main -->
+    <!-- ========================= -->
 
     <main class="main">
 
         <header class="top-bar">
 
-            <h1>Nexus AI</h1>
+            <div>
+
+                <h2>Nexus AI</h2>
+
+                <small>GPT-4.1 mini</small>
+
+            </div>
 
             <div class="top-buttons">
 
-                <button>
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
+                <button id="clearChat">
 
-                <button>
-                    <i class="fa-solid fa-moon"></i>
+                    🗑
+
                 </button>
 
             </div>
 
         </header>
 
-        <section class="chat-area" id="chatArea">
+        <section
+            class="chat-area"
+            id="chatArea">
 
             <div class="message ai">
 
                 <div class="avatar">
+
                     N
+
                 </div>
 
                 <div class="bubble">
@@ -112,15 +140,21 @@
                     <h4>Nexus</h4>
 
                     <p>
+
                         Hello David 👋
+
                     </p>
 
                     <p>
+
                         I'm Nexus AI.
+
                     </p>
 
                     <p>
+
                         What are we building today?
+
                     </p>
 
                 </div>
@@ -129,37 +163,39 @@
 
         </section>
 
-        <div class="typing" id="typing">
+        <div
+            class="typing"
+            id="typing">
 
             <span></span>
+
             <span></span>
+
             <span></span>
 
         </div>
 
-        <footer class="input-area">
-
-            <button id="attachButton">
-                <i class="fa-solid fa-paperclip"></i>
-            </button>
+        <div class="input-area">
 
             <input
-                    id="messageInput"
-                    type="text"
-                    placeholder="Message Nexus..."
-                    autocomplete="off"
-            >
+                id="messageInput"
+                type="text"
+                placeholder="Message Nexus AI...">
 
             <button id="sendButton">
-                <i class="fa-solid fa-paper-plane"></i>
+
+                ➜
+
             </button>
 
-        </footer>
+        </div>
 
     </main>
 
 </div>
 
 <script src="script.js"></script>
+
 </body>
+
 </html>
